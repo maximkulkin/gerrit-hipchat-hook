@@ -1,6 +1,6 @@
 # Git HipChat Hook
 
-A simple GIT `post-receive` hook script for notifying a room in HipChat.
+A simple Gerrit `ref-update` hook script for notifying a room in HipChat.
 
 ## Installation
 
@@ -9,7 +9,7 @@ For example:
 
 ```sh
 cd /home/git
-git clone git://github.com/eirc/git-hipchat-hook.git
+git clone git://github.com/maximkulkin/gerrit-hipchat-hook.git
 ```
 
 Clone [hipchat-cli](https://github.com/hipchat/hipchat-cli) somewhere in your GIT repository host server.
@@ -18,7 +18,7 @@ Clone [hipchat-cli](https://github.com/hipchat/hipchat-cli) somewhere in your GI
 git clone git://github.com/hipchat/hipchat-cli.git
 ```
 
-Go to the `hooks` directory in a bare repository you want to setup the hooks for and add a `post-receive` script like this one and make sure its executable.
+Go to the `hooks` directory in a bare repository you want to setup the hooks for and add a `ref-update` script like this one and make sure its executable.
 
 You can lookup the HipChat room id from the [rooms/list](https://www.hipchat.com/docs/api/method/rooms/list) API or use the HipChat room name (remember to urlencode it)
 
@@ -28,9 +28,9 @@ You can lookup the HipChat room id from the [rooms/list](https://www.hipchat.com
 HIPCHAT_SCRIPT="/path/to/hipchat_room_message"
 HIPCHAT_ROOM="HipChat room name or room_id"
 HIPCHAT_TOKEN="1234567890"
-HIPCHAT_FROM="GIT"
+HIPCHAT_FROM="Gerrit"
 
-. /path/to/hipchat-post-receive
+. /path/to/hipchat-ref-update
 ```
 If using gitorious make sure to add GIT_PROJECT="Name of project" to the hook:
 ```sh
@@ -42,7 +42,7 @@ HIPCHAT_TOKEN="1234567890"
 HIPCHAT_FROM="GIT"
 GIT_PROJECT="MyScripts"
 
-. /path/to/hipchat-post-receive
+. /path/to/hipchat-ref-update
 ```
 
 And you're done!

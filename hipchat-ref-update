@@ -1,7 +1,24 @@
 #!/bin/sh
 
-# Read variables passed on by GIT
-read OLDREV NEWREV REFNAME
+# Read CLI options passed by Gerrit
+unset PROJECT REFNAME UPLOADER OLDREV NEWREV
+
+NORMALIZED_ARGS=$(getopt -o "" --long "project:,refname:,uploader:,oldrev:,newrev:" -- "$@")
+
+eval set -- "$NORMALIZED_ARGS"
+
+while true ; do
+  case "$1" in
+    --project) PROJECT=$2; shift 2;;
+    --refname) REFNAME=$2; shift 2;;
+    --uploader) UPLOADER=$2; shift 2;;
+    --oldrev) OLDREV=$2; shift 2;;
+    --newrev) NEWREV=$2; shift 2;;
+    --) shift; break;;
+    *) echo "Invalid argument: $1"; exit 1;;
+  esac
+done
+
 
 # Find out basic variables
 GIT_EXEC=${GIT_EXEC:-`which git`}
